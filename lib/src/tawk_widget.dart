@@ -46,7 +46,6 @@ class _TawkState extends State<Tawk> {
 
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(widget.directChatLink))
       ..setNavigationDelegate(
         NavigationDelegate(
           onNavigationRequest: (NavigationRequest request) {
@@ -75,7 +74,8 @@ class _TawkState extends State<Tawk> {
             });
           },
         ),
-      );
+      )
+      ..loadRequest(Uri.parse(widget.directChatLink));
   }
 
   void _setUser(TawkVisitor visitor) {
@@ -96,6 +96,7 @@ class _TawkState extends State<Tawk> {
       ''';
     }
 
+    _controller.runJavaScript(darkMode);
     _controller.runJavaScript(javascriptString);
   }
 
@@ -116,3 +117,6 @@ class _TawkState extends State<Tawk> {
     );
   }
 }
+
+const darkMode =
+    'document.head.appendChild(document.createElement("style")).innerHTML="html { filter: invert(.95) hue-rotate(180deg) }"';
