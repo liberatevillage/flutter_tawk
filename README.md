@@ -3,6 +3,10 @@
 1. Updating dependencies.
 2. Fixing lint rules.
 3. Using adaptive circular indicator.
+4. Adding clear cache ability.
+5. Error handling callback.
+6. Dark color to the embbed web page.
+7. Adding color to loading indicator.
 
 # flutter_tawk
 
