@@ -33,7 +33,7 @@ class Tawk extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TawkState createState() => _TawkState();
+  State<Tawk> createState() => _TawkState();
 }
 
 class _TawkState extends State<Tawk> {
