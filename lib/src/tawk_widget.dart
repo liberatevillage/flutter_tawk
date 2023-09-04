@@ -23,6 +23,9 @@ class Tawk extends StatefulWidget {
   /// Render your own loading widget.
   final Widget? placeholder;
 
+  /// Error callback.
+  final ValueChanged<dynamic>? onError;
+
   const Tawk({
     Key? key,
     required this.directChatLink,
@@ -30,6 +33,7 @@ class Tawk extends StatefulWidget {
     this.onLoad,
     this.onLinkTap,
     this.placeholder,
+    this.onError,
   }) : super(key: key);
 
   @override
@@ -48,6 +52,7 @@ class _TawkState extends State<Tawk> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
+          onWebResourceError: widget.onError,
           onNavigationRequest: (NavigationRequest request) {
             if (request.url == 'about:blank' ||
                 request.url.contains('tawk.to')) {
@@ -96,8 +101,12 @@ class _TawkState extends State<Tawk> {
       ''';
     }
 
-    _controller.runJavaScript(darkMode);
-    _controller.runJavaScript(javascriptString);
+    try {
+      _controller.runJavaScript(darkMode);
+      _controller.runJavaScript(javascriptString);
+    } catch (e) {
+      widget.onError?.call(e);
+    }
   }
 
   @override
