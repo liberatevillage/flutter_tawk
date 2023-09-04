@@ -1,3 +1,9 @@
+## LIBERATE VILLAGE
+
+1. Updating dependencies.
+2. Fixing lint rules.
+3. Using adaptive circular indicator.
+
 # flutter_tawk
 
 [![pub package](https://img.shields.io/pub/v/flutter_tawk.svg)](https://pub.dartlang.org/packages/flutter_tawk)
