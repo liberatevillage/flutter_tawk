@@ -29,6 +29,9 @@ class Tawk extends StatefulWidget {
   /// Circular progress indicator color
   final Color? loadingColor;
 
+  /// Called for cleaning the cache
+  final bool clearCache;
+
   const Tawk({
     Key? key,
     required this.directChatLink,
@@ -38,6 +41,7 @@ class Tawk extends StatefulWidget {
     this.placeholder,
     this.onError,
     this.loadingColor,
+    this.clearCache = false,
   }) : super(key: key);
 
   @override
@@ -52,7 +56,15 @@ class _TawkState extends State<Tawk> {
   void initState() {
     super.initState();
 
-    _controller = WebViewController()
+    _controller = WebViewController();
+
+    if (widget.clearCache) {
+      WebViewCookieManager().clearCookies();
+      _controller.clearCache();
+      _controller.clearLocalStorage();
+    }
+
+    _controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
