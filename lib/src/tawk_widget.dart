@@ -26,6 +26,9 @@ class Tawk extends StatefulWidget {
   /// Error callback.
   final ValueChanged<dynamic>? onError;
 
+  /// Circular progress indicator color
+  final Color? loadingColor;
+
   const Tawk({
     Key? key,
     required this.directChatLink,
@@ -34,6 +37,7 @@ class Tawk extends StatefulWidget {
     this.onLinkTap,
     this.placeholder,
     this.onError,
+    this.loadingColor,
   }) : super(key: key);
 
   @override
@@ -111,6 +115,8 @@ class _TawkState extends State<Tawk> {
 
   @override
   Widget build(BuildContext context) {
+    final loadingColor = widget.loadingColor;
+
     return Stack(
       children: [
         WebViewWidget(
@@ -118,8 +124,12 @@ class _TawkState extends State<Tawk> {
         ),
         _isLoading
             ? widget.placeholder ??
-                const Center(
-                  child: CircularProgressIndicator.adaptive(),
+                Center(
+                  child: CircularProgressIndicator.adaptive(
+                    valueColor: loadingColor != null
+                        ? AlwaysStoppedAnimation<Color>(loadingColor)
+                        : null,
+                  ),
                 )
             : Container(),
       ],
