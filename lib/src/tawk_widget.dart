@@ -150,4 +150,4 @@ class _TawkState extends State<Tawk> {
 }
 
 const darkMode =
-    'document.head.appendChild(document.createElement("style")).innerHTML="html { filter: invert(.95) hue-rotate(180deg) }"';
+    'document.head.appendChild(document.createElement("style")).innerHTML="html { filter: invert(.95) hue-rotate(180deg) } img { filter: invert(0); }"';
